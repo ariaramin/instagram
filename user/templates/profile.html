@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<title>Account</title>
+
+
+{% block content %}
+
+
+       <!-- Account detail -->
+    <div class="row justify-content-center my-5">
+    <!--image-->
+    <div class="col-2 img">
+        <img src="" alt="picture" id="profimg" class="img-fluid rounded-circle" width="200" height="200">
+    </div>
+
+    <div class="col-4 detail">
+        <!--id & setting-->
+        <div>
+            <h1 class="d-inline">ID</h1>
+            <div class="btn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
+                <span class="fas fa-cogs"></span>
+            </div>
+        </div>
+        <!--posts & followers & following-->
+        <div class="info my-4">
+            <!--posts-->
+            <a href="" class="btn btn-warning">
+                <span class="badge bg-secondary">0</span>
+                Posts
+            </a>
+            <!--followers-->
+            <a href="" class="btn btn-warning mx-2">
+                <span class="badge bg-secondary">0</span>
+                Followers
+            </a>
+            <!--following-->
+            <a href="" class="btn btn-warning">
+                <span class="badge bg-secondary">0</span>
+                Following
+            </a>
+        </div>
+        <!--bio-->
+        <div class="bio">
+            <h4>Developer</h4>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Edit Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="content my-3">
+                        <div class="title mt-3">
+                            <h1>Instagram</h1>
+                        </div>
+                        <form class="px-5 py-4" action="">
+                            <input class="form-control" type="text" name="first-name" placeholder="First Name">
+                            <input class="form-control my-3" type="text" name="last-name" placeholder="Last Name">
+                            <input class="form-control" type="email" name="email" placeholder="Email">
+                            <input class="form-control my-3" type="text" name="username" placeholder="Username">
+                            <input class="form-control" type="password" name="password1" placeholder="Password">
+                            <input class="form-control my-3 mb-5" type="file" accept="image/*" name="image">
+                            <input class="form-control btn btn-primary" type="submit" value="Edit">
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+    </div>
+
+    <!-- Posts -->
+    <section class="posts container my-2">
+        <div class="row">
+            <div class="col-4 post mb-2" type="button" data-bs-toggle="modal" data-bs-target="#post">
+                <img src="anonymous-hacker-data-breach-5k-1440x900-7.jpg" alt="post" class="img-fluid">
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="post" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="card shadow-lg">
+                                <div class="header px-3 py-2">
+                                    <div class="user float-start">
+                                        <img src="hacker.png" alt="" class="img-fluid rounded-circle me-2" width="50">
+                                        <span>username</span>
+                                    </div>
+                                    <div class="dot float-end pt-3">
+                                        <span class="fas fa-ellipsis-h"></span>
+                                    </div>
+                                </div>
+
+                                <div class="content my-2">
+                                    <img src="anonymous-hacker-data-breach-5k-1440x900-7.jpg" alt="" class="img-fluid">
+                                </div>
+
+                                <div class="footer px-3 pb-2">
+                                    <div class="icons">
+                                        <div class="items float-start">
+                                            <span class="far fa-heart"></span>
+
+                                            <span class="far fa-comment"></span>
+
+                                            <span class="far fa-paper-plane"></span>
+                                        </div>
+
+                                        <div class="save float-end">
+                                            <span class="far fa-bookmark"></span>
+                                        </div><br>
+
+                                        <div class="like">
+                                            <span>0</span>
+                                            <span>like</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="caption">
+                                        <h5>postauthor :</h5>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, mollitia rerum architecto atque vero
+                                            ipsum accusamus tenetur vel quibusdam fuga dolores, recusandae ut repudiandae? Tenetur deserunt
+                                            doloremque temporibus repudiandae voluptas?</p>
+
+                                        <div class="date">
+                                            <small>Lorem ipsum dolor sit.</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+
+    <script>
+        let like = document.querySelector('.fa-heart');
+
+        like.addEventListener('click', event =>{
+            like.classList.toggle('fas');
+            like.style.color = 'crimson';
+        })
+    </script>
+{% endblock %}
+
+
+
+
+
+
+
