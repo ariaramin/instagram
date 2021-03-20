@@ -14,7 +14,7 @@
                         <form class="px-5 py-4" action="{% url 'login' %}" method="post">
                             {% csrf_token %}
                             <input class="form-control" type="text" name="username" placeholder="Username">
-                            <input class="form-control my-3" type="password" name="password1" placeholder="Password">
+                            <input class="form-control my-3" type="password" name="password" placeholder="Password">
                             <input class="form-control btn btn-primary" type="submit" value="Log in">
                         </form>
 

@@ -12,13 +12,13 @@
     <div class="row justify-content-center my-5">
     <!--image-->
     <div class="col-2 img">
-        <img src="" alt="picture" id="profimg" class="img-fluid rounded-circle" width="200" height="200">
+        <img src="{{ user.image.url }}" alt="picture" class="img-fluid rounded-circle" width="200" height="200">
     </div>
 
     <div class="col-4 detail">
         <!--id & setting-->
         <div>
-            <h1 class="d-inline">ID</h1>
+            <h1 class="d-inline">{{ user.username }}</h1>
             <div class="btn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
                 <span class="fas fa-cogs"></span>
             </div>
@@ -43,7 +43,7 @@
         </div>
         <!--bio-->
         <div class="bio">
-            <h4>Developer</h4>
+            <h4>{{ account.bio }}</h4>
         </div>
     </div>
 
@@ -73,88 +73,88 @@
                     </div>
                 </div>
             </div>
-            </div>
-    </div>
-
-    <!-- Posts -->
-    <section class="posts container my-2">
-        <div class="row">
-            <div class="col-4 post mb-2" type="button" data-bs-toggle="modal" data-bs-target="#post">
-                <img src="anonymous-hacker-data-breach-5k-1440x900-7.jpg" alt="post" class="img-fluid">
-            </div>
         </div>
-    </section>
-
-    <!-- Modal -->
-    <div class="modal fade" id="post" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="card shadow-lg">
-                                <div class="header px-3 py-2">
-                                    <div class="user float-start">
-                                        <img src="hacker.png" alt="" class="img-fluid rounded-circle me-2" width="50">
-                                        <span>username</span>
-                                    </div>
-                                    <div class="dot float-end pt-3">
-                                        <span class="fas fa-ellipsis-h"></span>
-                                    </div>
-                                </div>
-
-                                <div class="content my-2">
-                                    <img src="anonymous-hacker-data-breach-5k-1440x900-7.jpg" alt="" class="img-fluid">
-                                </div>
-
-                                <div class="footer px-3 pb-2">
-                                    <div class="icons">
-                                        <div class="items float-start">
-                                            <span class="far fa-heart"></span>
-
-                                            <span class="far fa-comment"></span>
-
-                                            <span class="far fa-paper-plane"></span>
-                                        </div>
-
-                                        <div class="save float-end">
-                                            <span class="far fa-bookmark"></span>
-                                        </div><br>
-
-                                        <div class="like">
-                                            <span>0</span>
-                                            <span>like</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="caption">
-                                        <h5>postauthor :</h5>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, mollitia rerum architecto atque vero
-                                            ipsum accusamus tenetur vel quibusdam fuga dolores, recusandae ut repudiandae? Tenetur deserunt
-                                            doloremque temporibus repudiandae voluptas?</p>
-
-                                        <div class="date">
-                                            <small>Lorem ipsum dolor sit.</small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
     </div>
 
-
-    <script>
-        let like = document.querySelector('.fa-heart');
-
-        like.addEventListener('click', event =>{
-            like.classList.toggle('fas');
-            like.style.color = 'crimson';
-        })
-    </script>
+{#    <!-- Posts -->#}
+{#    <section class="posts container my-2">#}
+{#        <div class="row">#}
+{#            <div class="col-4 post mb-2" type="button" data-bs-toggle="modal" data-bs-target="#post">#}
+{#                <img src="anonymous-hacker-data-breach-5k-1440x900-7.jpg" alt="post" class="img-fluid">#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+{##}
+{#    <!-- Modal -->#}
+{#    <div class="modal fade" id="post" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">#}
+{#        <div class="modal-dialog">#}
+{#                    <div class="modal-content">#}
+{#                        <div class="modal-header">#}
+{#                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#                        </div>#}
+{#                        <div class="modal-body">#}
+{#                            <div class="card shadow-lg">#}
+{#                                <div class="header px-3 py-2">#}
+{#                                    <div class="user float-start">#}
+{#                                        <img src="hacker.png" alt="" class="img-fluid rounded-circle me-2" width="50">#}
+{#                                        <span>username</span>#}
+{#                                    </div>#}
+{#                                    <div class="dot float-end pt-3">#}
+{#                                        <span class="fas fa-ellipsis-h"></span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{##}
+{#                                <div class="content my-2">#}
+{#                                    <img src="anonymous-hacker-data-breach-5k-1440x900-7.jpg" alt="" class="img-fluid">#}
+{#                                </div>#}
+{##}
+{#                                <div class="footer px-3 pb-2">#}
+{#                                    <div class="icons">#}
+{#                                        <div class="items float-start">#}
+{#                                            <span class="far fa-heart"></span>#}
+{##}
+{#                                            <span class="far fa-comment"></span>#}
+{##}
+{#                                            <span class="far fa-paper-plane"></span>#}
+{#                                        </div>#}
+{##}
+{#                                        <div class="save float-end">#}
+{#                                            <span class="far fa-bookmark"></span>#}
+{#                                        </div><br>#}
+{##}
+{#                                        <div class="like">#}
+{#                                            <span>0</span>#}
+{#                                            <span>like</span>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="caption">#}
+{#                                        <h5>postauthor :</h5>#}
+{#                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, mollitia rerum architecto atque vero#}
+{#                                            ipsum accusamus tenetur vel quibusdam fuga dolores, recusandae ut repudiandae? Tenetur deserunt#}
+{#                                            doloremque temporibus repudiandae voluptas?</p>#}
+{##}
+{#                                        <div class="date">#}
+{#                                            <small>Lorem ipsum dolor sit.</small>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{##}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#    </div>#}
+{##}
+{##}
+{#    <script>#}
+{#        let like = document.querySelector('.fa-heart');#}
+{##}
+{#        like.addEventListener('click', event =>{#}
+{#            like.classList.toggle('fas');#}
+{#            like.style.color = 'crimson';#}
+{#        })#}
+{#    </script>#}
 {% endblock %}
 
 
