@@ -85,76 +85,83 @@
 
         </div>
     </div>
-{#    <!-- Posts -->#}
-{#    <section class="posts container my-2">#}
-{#        <div class="row">#}
-{#            <div class="col-4 post mb-2" type="button" data-bs-toggle="modal" data-bs-target="#post">#}
-{#                <img src="anonymous-hacker-data-breach-5k-1440x900-7.jpg" alt="post" class="img-fluid">#}
-{#            </div>#}
-{#        </div>#}
-{#    </section>#}
-{##}
-{#    <!-- Modal -->#}
-{#    <div class="modal fade" id="post" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">#}
-{#        <div class="modal-dialog">#}
-{#                    <div class="modal-content">#}
-{#                        <div class="modal-header">#}
-{#                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
-{#                        </div>#}
-{#                        <div class="modal-body">#}
-{#                            <div class="card shadow-lg">#}
-{#                                <div class="header px-3 py-2">#}
-{#                                    <div class="user float-start">#}
-{#                                        <img src="hacker.png" alt="" class="img-fluid rounded-circle me-2" width="50">#}
-{#                                        <span>username</span>#}
-{#                                    </div>#}
-{#                                    <div class="dot float-end pt-3">#}
-{#                                        <span class="fas fa-ellipsis-h"></span>#}
-{#                                    </div>#}
-{#                                </div>#}
-{##}
-{#                                <div class="content my-2">#}
-{#                                    <img src="anonymous-hacker-data-breach-5k-1440x900-7.jpg" alt="" class="img-fluid">#}
-{#                                </div>#}
-{##}
-{#                                <div class="footer px-3 pb-2">#}
-{#                                    <div class="icons">#}
-{#                                        <div class="items float-start">#}
-{#                                            <span class="far fa-heart"></span>#}
-{##}
-{#                                            <span class="far fa-comment"></span>#}
-{##}
-{#                                            <span class="far fa-paper-plane"></span>#}
-{#                                        </div>#}
-{##}
-{#                                        <div class="save float-end">#}
-{#                                            <span class="far fa-bookmark"></span>#}
-{#                                        </div><br>#}
-{##}
-{#                                        <div class="like">#}
-{#                                            <span>0</span>#}
-{#                                            <span>like</span>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{##}
-{#                                    <div class="caption">#}
-{#                                        <h5>postauthor :</h5>#}
-{#                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, mollitia rerum architecto atque vero#}
-{#                                            ipsum accusamus tenetur vel quibusdam fuga dolores, recusandae ut repudiandae? Tenetur deserunt#}
-{#                                            doloremque temporibus repudiandae voluptas?</p>#}
-{##}
-{#                                        <div class="date">#}
-{#                                            <small>Lorem ipsum dolor sit.</small>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{##}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#    </div>#}
-{##}
+
+
+    <!-- Posts -->
+    <section class="posts container my-2">
+        <div class="row">
+            {% for post in posts %}
+                <div class="col-4 post mb-4" type="button" data-bs-toggle="modal" data-bs-target="#post{{ post.id }}">
+                    <img src="{{ post.image.url }}" alt="post" class="shadow-lg" width="416" height="416">
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="post{{ post.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card shadow-lg">
+                                        <div class="header px-3 py-2">
+                                                <div class="user float-start">
+                                                    <img src="{% static 'user/images/user.png' %}" alt="" class="img-fluid rounded-circle me-2" width="50">
+                                                    <span>{{ user.username }}</span>
+                                                </div>
+                                                <div class="dot float-end pt-3">
+                                                    <span class="fas fa-ellipsis-h"></span>
+                                                </div>
+                                            </div>
+
+                                        <div class="content my-2 text-center">
+                                            <img src="{{ post.image.url }}" alt="" class="img-fluid">
+                                        </div>
+
+                                        <div class="footer px-3 pb-2">
+                                                    <div class="icons">
+                                                        <div class="items float-start">
+                                                            <span class="far fa-heart"></span>
+
+                                                            <span class="far fa-comment"></span>
+
+                                                            <span class="far fa-paper-plane"></span>
+                                                        </div>
+
+                                                        <div class="save float-end">
+                                                            <span class="far fa-bookmark"></span>
+                                                        </div><br>
+
+                                                        <div class="like">
+                                                            <span>0</span>
+                                                            <span>like</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="caption">
+                                                        <h5>{{ user.username }} :</h5>
+                                                        <p>{{ post.description }}</p>
+
+                                                        <div class="date">
+                                                            <small>{{ post.created_at.date }}</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{% url 'update.post' post.id  %}" class="btn btn-warning">Update</a>
+                                <a href="{% url 'delete.post' post.id  %}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </section>
+
+
 {##}
 {#    <script>#}
 {#        let like = document.querySelector('.fa-heart');#}

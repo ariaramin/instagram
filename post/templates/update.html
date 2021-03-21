@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-4 my-5">
+                <div class="card text-center">
+                    <div class="content my-3">
+                        <div class="title mt-3">
+                            <h1>Add Post</h1>
+                        </div>
+                        <form class="px-5 py-4" action="{% url 'update.post' post.id %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input class="form-control mb-3" type="file" name="image" value="{{ post.image }}">
+                            <textarea class="form-control mb-5" name="description">{{ post.description }}</textarea>
+                            <input class="form-control btn btn-primary" type="submit" value="Add">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

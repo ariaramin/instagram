@@ -28,9 +28,12 @@
                 </ul>
                 <!--profile pic-->
                 <div class="profile">
-                    <a href="">
-                        <img src="{% static 'user/images/user.png' %}" alt="profile" class="rounded-circle bg-white" width="50">
-                    </a>
+                    {% if request.user.is_active %}
+                        <a href="">
+                            <img src="{% static 'user/images/user.png' %}" alt="profile" class="rounded-circle bg-white" width="50">
+                        </a>
+                    {% endif %}
+
                 </div>
             </nav>
         </header>

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -6,6 +7,6 @@ class Post(models.Model):
     image = models.ImageField(upload_to='static/post/images')
     # like = models.IntegerField(max_length=100)
     description = models.TextField()
-    # user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
