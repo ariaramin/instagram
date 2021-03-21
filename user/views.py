@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from .models import Account
+from .forms import AccountForms
 
 # Create your views here.
 
@@ -15,5 +16,6 @@ def register(request):
 
 
 def profile(request):
-    account = Account.objects.all()
-    return render(request, 'profile.html', {'account': account})
+    return render(request, 'profile.html')
+
+

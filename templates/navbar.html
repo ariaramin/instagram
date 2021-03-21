@@ -1,3 +1,6 @@
+{% load static %}
+
+
         <!--header-->
         <header class="navbar navbar-expand navbar-dark bg-dark">
             <nav class="navbar-nav container">
@@ -26,7 +29,7 @@
                 <!--profile pic-->
                 <div class="profile">
                     <a href="">
-                        <img src="hacker.png" alt="profile" class="rounded-circle" width="50">
+                        <img src="{% static 'user/images/user.png' %}" alt="profile" class="rounded-circle bg-white" width="50">
                     </a>
                 </div>
             </nav>

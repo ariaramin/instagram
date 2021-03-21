@@ -8,74 +8,83 @@
 {% block content %}
 
 
-       <!-- Account detail -->
-    <div class="row justify-content-center my-5">
-    <!--image-->
-    <div class="col-2 img">
-        <img src="{{ user.image.url }}" alt="picture" class="img-fluid rounded-circle" width="200" height="200">
-    </div>
-
-    <div class="col-4 detail">
-        <!--id & setting-->
-        <div>
-            <h1 class="d-inline">{{ user.username }}</h1>
-            <div class="btn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
-                <span class="fas fa-cogs"></span>
+    <div class="container">
+           <!-- Account detail -->
+        <div class="row justify-content-center my-5 border-bottom">
+            <!--image-->
+            <div class="col-2 img">
+                <img src="{% static 'user/images/user.png' %}" alt="picture" class="img-fluid rounded-circle" width="200" height="200">
             </div>
-        </div>
-        <!--posts & followers & following-->
-        <div class="info my-4">
-            <!--posts-->
-            <a href="" class="btn btn-warning">
-                <span class="badge bg-secondary">0</span>
-                Posts
-            </a>
-            <!--followers-->
-            <a href="" class="btn btn-warning mx-2">
-                <span class="badge bg-secondary">0</span>
-                Followers
-            </a>
-            <!--following-->
-            <a href="" class="btn btn-warning">
-                <span class="badge bg-secondary">0</span>
-                Following
-            </a>
-        </div>
-        <!--bio-->
-        <div class="bio">
-            <h4>{{ account.bio }}</h4>
-        </div>
-    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Edit Account</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="col-4 detail">
+                <!--id & setting-->
+                <div>
+                    <h1 class="d-inline">{{ user.username }}</h1>
+                    <div class="btn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
+                        <span class="fas fa-cogs"></span>
+                    </div>
+                    <a href="{% url 'create.post' %}" class="btn btn-success">
+                        Add Post
+                    </a>
                 </div>
-                <div class="modal-body text-center">
-                    <div class="content my-3">
-                        <div class="title mt-3">
-                            <h1>Instagram</h1>
-                        </div>
-                        <form class="px-5 py-4" action="">
-                            <input class="form-control" type="text" name="first-name" placeholder="First Name">
-                            <input class="form-control my-3" type="text" name="last-name" placeholder="Last Name">
-                            <input class="form-control" type="email" name="email" placeholder="Email">
-                            <input class="form-control my-3" type="text" name="username" placeholder="Username">
-                            <input class="form-control" type="password" name="password1" placeholder="Password">
-                            <input class="form-control my-3 mb-5" type="file" accept="image/*" name="image">
-                            <input class="form-control btn btn-primary" type="submit" value="Edit">
-                        </form>
+                <!--posts & followers & following-->
+                <div class="info my-4">
+                    <!--posts-->
+                    <a href="" class="btn btn-warning">
+                        <span class="badge bg-secondary">0</span>
+                        Posts
+                    </a>
+                    <!--followers-->
+                    <a href="" class="btn btn-warning mx-2">
+                        <span class="badge bg-secondary">0</span>
+                        Followers
+                    </a>
+                    <!--following-->
+                    <a href="" class="btn btn-warning">
+                        <span class="badge bg-secondary">0</span>
+                        Following
+                    </a>
+                </div>
+                <!--bio-->
+                <div class="bio">
+                    <h4>{{ account.bio }}</h4>
+                </div>
+            </div>
 
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit Account</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <div class="content my-3">
+                                <div class="title mt-3">
+                                    <h1>Instagram</h1>
+                                </div>
+                                <form class="px-5 py-4" action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input class="form-control" type="text" name="first-name" placeholder="First Name">
+                                    <input class="form-control my-3" type="text" name="last-name" placeholder="Last Name">
+                                    <input class="form-control" type="email" name="email" placeholder="Email">
+                                    <input class="form-control my-3" type="text" name="username" placeholder="Username">
+                                    <input class="form-control" type="password" name="password1" placeholder="Password">
+                                    <input class="form-control my-3" type="text" name="bio" placeholder="Bio">
+                                    <input class="form-control mb-5" type="file" accept="image/*" name="image">
+
+                                    <input class="form-control btn btn-primary" type="submit" value="Edit">
+                                </form>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-
 {#    <!-- Posts -->#}
 {#    <section class="posts container my-2">#}
 {#        <div class="row">#}
@@ -156,7 +165,6 @@
 {#        })#}
 {#    </script>#}
 {% endblock %}
-
 
 
 

@@ -6,4 +6,4 @@ class AccountForms(forms.ModelForm):
     class Meta:
 
         model = Account
-        fields = ['image', 'bio']
+        fields = ['bio', 'image']
