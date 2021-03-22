@@ -15,9 +15,11 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form})
 
 
-def profile(request, user_id):
-    user = User.objects.get(id=user_id)
-    posts = Post.objects.filter(user_id=user_id)
-    return render(request, 'profile.html', {'posts': posts, 'user': user})
+def profile(request):
+    posts = Post.objects.filter(user_id=request.user.id)
+    posts_count = Post.objects.filter(user_id=request.user.id).count()
+    return render(request, 'profile.html', {'posts': posts, 'posts_count': posts_count})
+
+
 
 

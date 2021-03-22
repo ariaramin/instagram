@@ -26,12 +26,15 @@
                     <a href="{% url 'create.post' %}" class="btn btn-success">
                         Add Post
                     </a>
+                    <a href="{% url 'logout' %}" class="btn btn-danger">
+                        Logout
+                    </a>
                 </div>
                 <!--posts & followers & following-->
                 <div class="info my-4">
                     <!--posts-->
                     <a href="" class="btn btn-warning">
-                        <span class="badge bg-secondary">0</span>
+                        <span class="badge bg-secondary">{{ posts_count }}</span>
                         Posts
                     </a>
                     <!--followers-->
@@ -66,13 +69,13 @@
                                 </div>
                                 <form class="px-5 py-4" action="" method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    <input class="form-control" type="text" name="first-name" placeholder="First Name">
-                                    <input class="form-control my-3" type="text" name="last-name" placeholder="Last Name">
-                                    <input class="form-control" type="email" name="email" placeholder="Email">
-                                    <input class="form-control my-3" type="text" name="username" placeholder="Username">
-                                    <input class="form-control" type="password" name="password1" placeholder="Password">
-                                    <input class="form-control my-3" type="text" name="bio" placeholder="Bio">
-                                    <input class="form-control mb-5" type="file" accept="image/*" name="image">
+                                    <input class="form-control" type="text" name="first-name" placeholder="First Name" value="{{ user.first_name }}">
+                                    <input class="form-control my-3" type="text" name="last-name" placeholder="Last Name" value="{{ user.last_name }}">
+                                    <input class="form-control" type="email" name="email" placeholder="Email" value="{{ user.email }}">
+                                    <input class="form-control my-3" type="text" name="username" placeholder="Username" value="{{ user.username }}">
+                                    <input class="form-control" type="password" name="password1" placeholder="Password" value="{{ user.password }}">
+                                    <input class="form-control my-3" type="text" name="bio" placeholder="Bio" value="{{ account.bio }}">
+                                    <input class="form-control mb-5" type="file" accept="image/*" name="image" value="{{ account.image }}">
 
                                     <input class="form-control btn btn-primary" type="submit" value="Edit">
                                 </form>
@@ -92,7 +95,9 @@
         <div class="row">
             {% for post in posts %}
                 <div class="col-4 post mb-4" type="button" data-bs-toggle="modal" data-bs-target="#post{{ post.id }}">
-                    <img src="{{ post.image.url }}" alt="post" class="shadow-lg" width="416" height="416">
+                    <div class="card">
+                        <img src="{{ post.image.url }}" alt="post" class="card-img" width="416" height="416">
+                    </div>
                 </div>
 
                 <!-- Modal -->
@@ -115,7 +120,7 @@
                                             </div>
 
                                         <div class="content my-2 text-center">
-                                            <img src="{{ post.image.url }}" alt="" class="img-fluid">
+                                            <img src="{{ post.image.url }}" alt="" class="card-img">
                                         </div>
 
                                         <div class="footer px-3 pb-2">
