@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-7 my-5">
+                {% for post in posts %}
+                    <div class="card shadow-lg my-5">
+
+                        <div class="header px-3 py-2">
+                            <div class="user float-start">
+                                <a href="" class="link-dark">
+                                    <img src="{{ post.user.image }}" alt="" class="img-fluid rounded-circle me-2" width="50">
+                                    <span>{{ post.user.username }}</span>
+                                </a>
+                            </div>
+                            <div class="dot float-end pt-3">
+                                <span class="fas fa-ellipsis-h"></span>
+                            </div>
+                        </div>
+
+                        <div class="content my-2">
+                            <img src="{{ post.image.url }}" alt="" class="card-img">
+                        </div>
+
+                        <div class="footer px-3 pb-2">
+                                <div class="icons">
+                                    <div class="items float-start">
+                                        <span class="far fa-heart"></span>
+
+                                        <span class="far fa-comment"></span>
+
+                                        <span class="far fa-paper-plane"></span>
+                                    </div>
+
+                                    <div class="save float-end">
+                                        <span class="far fa-bookmark"></span>
+                                    </div><br>
+
+                                    <div class="like">
+                                        <span>0</span>
+                                        <span>like</span>
+                                    </div>
+                                </div>
+
+                                <div class="caption">
+                                    <h5>{{ post.user.username }} :</h5>
+                                    <p>{{ post.description }}</p>
+                                    <div class="date">
+                                        <small>{{ post.created_at.date }}.</small>
+                                    </div>
+                                </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        let like = document.querySelector('.fa-heart');
+
+        like.addEventListener('click', event =>{
+            like.classList.toggle('fas');
+            like.style.color = 'crimson';
+        })
+    </script>
+{% endblock %}
+
+
+

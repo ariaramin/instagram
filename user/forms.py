@@ -1,9 +1,9 @@
 from django import forms
-from .models import Account
+from .models import Profile
 
 
-class AccountForms(forms.ModelForm):
+class ProfileForms(forms.ModelForm):
     class Meta:
 
-        model = Account
+        model = Profile
         fields = ['bio', 'image']

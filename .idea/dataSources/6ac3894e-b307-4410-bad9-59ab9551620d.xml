@@ -386,7 +386,7 @@
     <table id="182" parent="2" name="sqlite_sequence">
       <System>1</System>
     </table>
-    <table id="183" parent="2" name="user_account"/>
+    <table id="183" parent="2" name="user_profile"/>
     <argument id="184" parent="6">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
@@ -1799,56 +1799,88 @@ model</ColNames>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="592" parent="180">
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="593" parent="181" name="type">
-      <Position>1</Position>
-      <DataType>text|0s</DataType>
-    </column>
-    <column id="594" parent="181" name="name">
-      <Position>2</Position>
-      <DataType>text|0s</DataType>
-    </column>
-    <column id="595" parent="181" name="tbl_name">
-      <Position>3</Position>
-      <DataType>text|0s</DataType>
-    </column>
-    <column id="596" parent="181" name="rootpage">
-      <Position>4</Position>
-      <DataType>int|0s</DataType>
-    </column>
-    <column id="597" parent="181" name="sql">
-      <Position>5</Position>
-      <DataType>text|0s</DataType>
-    </column>
-    <column id="598" parent="182" name="name">
-      <Position>1</Position>
-    </column>
-    <column id="599" parent="182" name="seq">
-      <Position>2</Position>
-    </column>
-    <column id="600" parent="183" name="user_ptr_id">
-      <Position>1</Position>
+    <column id="592" parent="180" name="user_id">
+      <Position>6</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="601" parent="183" name="bio">
+    <index id="593" parent="180" name="post_post_user_id_b9c97aef">
+      <ColNames>user_id</ColNames>
+      <ColumnCollations></ColumnCollations>
+    </index>
+    <key id="594" parent="180">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="595" parent="180">
+      <ColNames>user_id</ColNames>
+      <RefTableName>user_profile</RefTableName>
+      <RefColNames>id</RefColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+    </foreign-key>
+    <column id="596" parent="181" name="type">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="597" parent="181" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="602" parent="183" name="image">
+    <column id="598" parent="181" name="tbl_name">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="599" parent="181" name="rootpage">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="600" parent="181" name="sql">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="601" parent="182" name="name">
+      <Position>1</Position>
+    </column>
+    <column id="602" parent="182" name="seq">
+      <Position>2</Position>
+    </column>
+    <column id="603" parent="183" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="604" parent="183" name="bio">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="605" parent="183" name="image">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="603" parent="183">
-      <ColNames>user_ptr_id</ColNames>
+    <column id="606" parent="183" name="user_id">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="607" parent="183" name="sqlite_autoindex_user_profile_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>user_id</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="608" parent="183">
+      <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="604" parent="183">
-      <ColNames>user_ptr_id</ColNames>
+    <key id="609" parent="183">
+      <ColNames>user_id</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_user_profile_1</UnderlyingIndexName>
+    </key>
+    <foreign-key id="610" parent="183">
+      <ColNames>user_id</ColNames>
       <RefTableName>auth_user</RefTableName>
       <RefColNames>id</RefColNames>
       <Deferrable>1</Deferrable>

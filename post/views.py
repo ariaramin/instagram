@@ -15,6 +15,11 @@ def create(request):
     return render(request, 'create.html')
 
 
+def show(request):
+    posts = Post.objects.all()
+    return render(request, 'show.html', {'posts': posts})
+
+
 def update(request, post_id):
     post = Post.objects.get(id=post_id)
     if request.method == 'POST':

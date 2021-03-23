@@ -5,7 +5,7 @@
         <header class="navbar navbar-expand navbar-dark bg-dark">
             <nav class="navbar-nav container">
                 <!--brand-->
-                <a href="" class="navbar-brand">Instagram</a>
+                <a href="{% url 'show.post' %}" class="navbar-brand">Instagram</a>
                 <!--search box-->
                 <div class="search-box mx-auto">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
@@ -13,7 +13,7 @@
                 <!--menu-->
                 <ul class="navbar-nav justify-content-end">
                     <li class="nav-item">
-                        <a href="" class="nav-link"><span class="fas fa-home "></span></a></span>
+                        <a href="{% url 'show.post' %}" class="nav-link"><span class="fas fa-home "></span></a></span>
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link"><span class="far fa-paper-plane"></span></a>
@@ -28,9 +28,9 @@
                 </ul>
                 <!--profile pic-->
                 <div class="profile">
-                    {% if request.user.is_active %}
+                    {% if request.user %}
                         <a href="">
-                            <img src="{% static 'user/images/user.png' %}" alt="profile" class="rounded-circle bg-white" width="50">
+                            <img src="{{ request.user.image }}" alt="profile" class="rounded-circle bg-white" width="50">
                         </a>
                     {% endif %}
 
