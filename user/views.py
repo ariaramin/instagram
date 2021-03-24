@@ -34,3 +34,4 @@ def profile(request):
         'posts': Post.objects.filter(user_id=request.user.id),
     }
     return render(request, 'profile.html', context)
+
