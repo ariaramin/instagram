@@ -64,18 +64,17 @@
                         </div>
                         <div class="modal-body text-center">
                             <div class="content my-3">
-                                <div class="title mt-3">
-                                    <h1>Instagram</h1>
-                                </div>
                                 <form class="px-5 py-4" action="{% url 'edit' user.user.id %}" method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    <input class="form-control" type="text" name="first-name" placeholder="First Name" value="{{ user.user.first_name }}">
-                                    <input class="form-control my-3" type="text" name="last-name" placeholder="Last Name" value="{{ user.user.last_name }}">
-                                    <input class="form-control" type="email" name="email" placeholder="Email" value="{{ user.user.email }}">
-                                    <input class="form-control my-3" type="text" name="username" placeholder="Username" value="{{ user.user.username }}">
-                                    <input class="form-control" type="password" name="password1" placeholder="Password" value="{{ user.user.password }}">
-                                    <input class="form-control my-3" type="text" name="bio" placeholder="Bio" value="{{ user.bio }}">
-                                    <input class="form-control mb-5" type="file" accept="image/*" name="image" value="{{ user.image }}">
+{#                                    <input class="form-control" type="text" name="first-name" placeholder="First Name" value="{{ user.user.first_name }}">#}
+{#                                    <input class="form-control my-3" type="text" name="last-name" placeholder="Last Name" value="{{ user.user.last_name }}">#}
+{#                                    <input class="form-control" type="email" name="email" placeholder="Email" value="{{ user.user.email }}">#}
+{#                                    <input class="form-control my-3" type="text" name="username" placeholder="Username" value="{{ user.user.username }}">#}
+{#                                    <input class="form-control" type="password" name="password1" placeholder="Password" value="{{ user.user.password }}">#}
+                                    <label class="form-label" for="bio">Bio:</label>
+                                    <input class="form-control mb-3" type="text" name="bio" id="bio" placeholder="Bio" value="{{ user.bio }}">
+                                    <label class="form-label" for="image">Image:</label>
+                                    <input class="form-control mb-5" type="file" accept="image/*" name="image" id="image" value="{{ user.image }}">
 
                                     <input class="form-control btn btn-primary" type="submit" value="Edit">
                                 </form>
