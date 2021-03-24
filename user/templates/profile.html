@@ -16,7 +16,7 @@
                 <img src="{{ user.image.url }}" alt="picture" class="img-fluid rounded-circle" width="200" height="200">
             </div>
 
-            <div class="col-4 detail">
+            <div class="col-5 detail">
                 <!--id & setting-->
                 <div>
                     <h1 class="d-inline">{{ user.user.username }}</h1>
@@ -34,7 +34,7 @@
                 <div class="info my-4">
                     <!--posts-->
                     <a href="" class="btn btn-warning">
-                        <span class="badge bg-secondary">{{ posts_count }}</span>
+                        <span class="badge bg-secondary">{{ posts.count }}</span>
                         Posts
                     </a>
                     <!--followers-->
@@ -114,7 +114,7 @@
                                                     <img src="{{ user.image.url }}" alt="" class="img-fluid rounded-circle me-2" width="50">
                                                     <span>{{ user.user.username }}</span>
                                                 </div>
-                                                <div class="dot float-end pt-3">
+                                                <div class="dot float-end pt-2">
                                                     <span class="fas fa-ellipsis-h"></span>
                                                 </div>
                                             </div>
@@ -167,15 +167,6 @@
     </section>
 
 
-{##}
-{#    <script>#}
-{#        let like = document.querySelector('.fa-heart');#}
-{##}
-{#        like.addEventListener('click', event =>{#}
-{#            like.classList.toggle('fas');#}
-{#            like.style.color = 'crimson';#}
-{#        })#}
-{#    </script>#}
 {% endblock %}
 
 

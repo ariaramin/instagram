@@ -9,15 +9,14 @@
             <div class="col-7 my-5">
                 {% for post in posts %}
                     <div class="card shadow-lg my-5">
-
                         <div class="header px-3 py-2">
                             <div class="user float-start">
                                 <a href="" class="link-dark">
-                                    <img src="{{ post.user.image }}" alt="" class="img-fluid rounded-circle me-2" width="50">
+                                    <img src="{{ post.user.profile.image.url }}" alt="" class="img-fluid rounded-circle me-2" width="50">
                                     <span>{{ post.user.username }}</span>
                                 </a>
                             </div>
-                            <div class="dot float-end pt-3">
+                            <div class="dot float-end pt-2">
                                 <span class="fas fa-ellipsis-h"></span>
                             </div>
                         </div>
@@ -29,6 +28,7 @@
                         <div class="footer px-3 pb-2">
                                 <div class="icons">
                                     <div class="items float-start">
+
                                         <span class="far fa-heart"></span>
 
                                         <span class="far fa-comment"></span>
@@ -62,14 +62,6 @@
     </main>
 
 
-    <script>
-        let like = document.querySelector('.fa-heart');
-
-        like.addEventListener('click', event =>{
-            like.classList.toggle('fas');
-            like.style.color = 'crimson';
-        })
-    </script>
 {% endblock %}
 
 

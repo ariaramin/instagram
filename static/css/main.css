@@ -1,27 +1,13 @@
-@font-face{
-    src: url('../font/Signika-VariableFont_wght.ttf');
-    font-family: 'signika';
-}
-
-@font-face{
-    src: url('../font/Lobster-Regular.ttf');
-    font-family: 'lobster';
-}
 
 *{
     margin: 0;
     padding: 0;
-    font-family: 'signika', sans-serif;
 }
 
 a{
     text-decoration: none;
 }
 
-.navbar-brand{
-    font-size: 2rem;
-    font-family: 'lobster', sans-serif;
-}
 
 ul .nav-link{
     font-size: 1.7rem;
@@ -31,7 +17,6 @@ ul .nav-link{
     position: relative;
     font-size: 1.3rem;
 }
-
 
 .card .header span{
     font-size: 1.4rem;

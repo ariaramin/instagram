@@ -12,8 +12,9 @@ def register(request):
     form = UserCreationForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
-            form.save()
-            return redirect('profile')
+            f = form.save()
+            Profile.objects.create(user_id=f.id)
+            return redirect('login')
     return render(request, 'registration/register.html', {'form': form})
 
 
@@ -31,6 +32,5 @@ def profile(request):
     context = {
         'user': Profile.objects.get(user_id=request.user.id),
         'posts': Post.objects.filter(user_id=request.user.id),
-        'posts_count': Post.objects.filter(user_id=request.user.id).count(),
     }
     return render(request, 'profile.html', context)

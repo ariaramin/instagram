@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 
 {% block content %}
@@ -9,7 +9,7 @@
                 <div class="card text-center">
                     <div class="content my-3">
                         <div class="title mt-3">
-                            <h1>Instagram</h1>
+                            <img src="{% static 'img/title.png' %}" alt="instagram" height="50">
                         </div>
                         <form class="px-5 py-4" action="{% url 'login' %}" method="post">
                             {% csrf_token %}

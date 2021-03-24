@@ -1814,7 +1814,7 @@ model</ColNames>
     </key>
     <foreign-key id="595" parent="180">
       <ColNames>user_id</ColNames>
-      <RefTableName>user_profile</RefTableName>
+      <RefTableName>auth_user</RefTableName>
       <RefColNames>id</RefColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1865,21 +1865,26 @@ model</ColNames>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="607" parent="183" name="sqlite_autoindex_user_profile_1">
+    <column id="607" parent="183" name="like">
+      <Position>5</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="608" parent="183" name="sqlite_autoindex_user_profile_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_id</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="608" parent="183">
+    <key id="609" parent="183">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="609" parent="183">
+    <key id="610" parent="183">
       <ColNames>user_id</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_user_profile_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="610" parent="183">
+    <foreign-key id="611" parent="183">
       <ColNames>user_id</ColNames>
       <RefTableName>auth_user</RefTableName>
       <RefColNames>id</RefColNames>

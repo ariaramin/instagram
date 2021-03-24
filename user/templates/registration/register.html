@@ -1,12 +1,5 @@
 {% extends 'base.html' %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load static %}
 
     {% block content %}
         <main class="container">
@@ -15,7 +8,7 @@
                     <div class="card text-center">
                         <div class="content my-3">
                             <div class="title mt-3">
-                                <h1>Instagram</h1>
+                                <img src="{% static 'img/title.png' %}" alt="instagram" height="50">
                             </div>
                             <form class="px-5 py-4" action="{% url 'register' %}" method="post">
                                 {% csrf_token %}
@@ -23,6 +16,7 @@
                                 <input class="form-control my-3" type="text" name="username" placeholder="Username">
                                 <input class="form-control" type="password" name="password1" placeholder="Password">
                                 <input class="form-control my-3 mb-5" type="password" name="password2" placeholder="Confirm Password">
+
                                 <input class="form-control btn btn-primary" type="submit" value="Sign up">
                             </form>
 
@@ -34,6 +28,3 @@
         </main>
     {% endblock %}
 
-
-</body>
-</html>
