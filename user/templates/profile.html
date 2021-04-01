@@ -18,18 +18,23 @@
 
             <div class="col-5 detail">
                 <!--id & setting-->
-                <div>
-                    <h1 class="d-inline">{{ user.user.username }}</h1>
-                    <div class="btn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
-                        <span class="fas fa-cogs"></span>
+
+                    <div>
+                        <h1 class="d-inline">{{ user.user.username }}</h1>
+                        {% if user.user.id == request.user.id %}
+                            <div class="btn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
+                                <span class="fas fa-cogs"></span>
+                            </div>
+                            <a href="{% url 'create.post' %}" class="btn btn-success">
+                                Add Post
+                            </a>
+                            <a href="{% url 'logout' %}" class="btn btn-danger">
+                                Logout
+                            </a>
+                        {% endif %}
                     </div>
-                    <a href="{% url 'create.post' %}" class="btn btn-success">
-                        Add Post
-                    </a>
-                    <a href="{% url 'logout' %}" class="btn btn-danger">
-                        Logout
-                    </a>
-                </div>
+
+
                 <!--posts & followers & following-->
                 <div class="info my-4">
                     <!--posts-->
@@ -153,10 +158,12 @@
                                                 </div>
                                     </div>
                             </div>
-                            <div class="modal-footer">
-                                <a href="{% url 'update.post' post.id  %}" class="btn btn-warning">Update</a>
-                                <a href="{% url 'delete.post' post.id  %}" class="btn btn-danger">Delete</a>
-                            </div>
+                            {% if user.user.id == request.user.id %}
+                                <div class="modal-footer">
+                                    <a href="{% url 'update.post' post.id  %}" class="btn btn-warning">Update</a>
+                                    <a href="{% url 'delete.post' post.id  %}" class="btn btn-danger">Delete</a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

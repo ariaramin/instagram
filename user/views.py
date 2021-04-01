@@ -24,14 +24,14 @@ def edit(request, user_id):
         form = ProfileForms(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            return redirect('profile', user_id)
     return render(request, 'profile.html')
 
 
-def profile(request):
+def profile(request, user_id):
     context = {
-        'user': Profile.objects.get(user_id=request.user.id),
-        'posts': Post.objects.filter(user_id=request.user.id),
+        'user': Profile.objects.get(user_id=user_id),
+        'posts': Post.objects.filter(user_id=user_id),
     }
     return render(request, 'profile.html', context)
 

@@ -5,9 +5,15 @@
         <header class="navbar navbar-expand navbar-light bg-light border-bottom shadow-sm">
             <nav class="navbar-nav container">
                 <!--brand-->
-                <a href="{% url 'show.post' %}" class="navbar-brand">
-                    <img src="{% static 'img/instagram.png' %}" alt="logo" height="50">
-                </a>
+                {% if request.user.is_active %}
+                    <a href="{% url 'show.post' %}" class="navbar-brand">
+                        <img src="{% static 'img/instagram.png' %}" alt="logo" height="50">
+                    </a>
+                {% else %}
+                    <span class="navbar-brand">
+                        <img src="{% static 'img/instagram.png' %}" alt="logo" height="50">
+                    </span>
+                {% endif %}
                 <!--search box-->
                 <div class="search-box mx-auto">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
@@ -15,7 +21,11 @@
                 <!--menu-->
                 <ul class="navbar-nav justify-content-end">
                     <li class="nav-item">
-                        <a href="{% url 'show.post' %}" class="nav-link"><span class="fas fa-home "></span></a>
+                        {% if request.user.is_active %}
+                            <a href="{% url 'show.post' %}" class="nav-link"><span class="fas fa-home "></span></a>
+                        {% else %}
+                            <span class="nav-link"><span class="fas fa-home "></span></span>
+                        {% endif %}
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link"><span class="far fa-paper-plane"></span></a>
@@ -31,7 +41,7 @@
                 <!--profile pic-->
                 <div class="profile">
                     {% if request.user.is_active %}
-                        <a href="{% url 'profile' %}">
+                        <a href="{% url 'profile' request.user.id %}">
                             <img src="{{ request.user.profile.image.url }}" alt="profile" class="rounded-circle bg-white" width="50">
                         </a>
                     {% endif %}

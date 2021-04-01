@@ -11,7 +11,7 @@
                     <div class="card shadow-lg my-5">
                         <div class="header px-3 py-2">
                             <div class="user float-start">
-                                <a href="" class="link-dark">
+                                <a href="{% url 'profile' post.user.id %}" class="link-dark">
                                     <img src="{{ post.user.profile.image.url }}" alt="" class="img-fluid rounded-circle me-2" width="50">
                                     <span>{{ post.user.username }}</span>
                                 </a>

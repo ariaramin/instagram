@@ -125,5 +125,5 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-
+LOGIN_REDIRECT_URL = 'show.post'
 LOGOUT_REDIRECT_URL = 'login'
