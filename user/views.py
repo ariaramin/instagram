@@ -35,3 +35,15 @@ def profile(request, user_id):
     }
     return render(request, 'profile.html', context)
 
+
+def follow(request, user_id):
+    user = Profile.objects.get(user_id=request.user.id)
+    user.following.add(user_id)
+    user.save()
+    return redirect('profile', user_id)
+
+
+def unfollow(request, user_id):
+    user = Profile.objects.get(user_id=request.user.id)
+    user.following.remove(user_id)
+    return redirect('profile', user_id)

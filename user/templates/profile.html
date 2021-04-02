@@ -31,6 +31,25 @@
                             <a href="{% url 'logout' %}" class="btn btn-danger">
                                 Logout
                             </a>
+                        {% else %}
+                            {% if request.user.profile.following.all %}
+                                {% for following in request.user.profile.following.all %}
+                                    {% if user.user.id == following.id %}
+                                        <a href="{% url 'unfollow' user.user.id %}" class="btn btn-secondary mx-2">
+                                        Unfollow
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'follow' user.user.id %}" class="btn btn-primary mx-2">
+                                            Follow
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <a href="{% url 'follow' user.user.id %}" class="btn btn-primary mx-2">
+                                    Follow
+                                </a>
+                            {% endif %}
+
                         {% endif %}
                     </div>
 
@@ -49,7 +68,7 @@
                     </a>
                     <!--following-->
                     <a href="" class="btn btn-warning">
-                        <span class="badge bg-secondary">0</span>
+                        <span class="badge bg-secondary">{{ user.following.count }}</span>
                         Following
                     </a>
                 </div>
