@@ -39,6 +39,7 @@ def profile(request, user_id):
 def follow(request, user_id):
     user = Profile.objects.get(user_id=request.user.id)
     user.following.add(user_id)
+    # print(user.following.get(username='ariaramin'))
     user.save()
     return redirect('profile', user_id)
 
