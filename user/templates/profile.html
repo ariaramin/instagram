@@ -9,96 +9,151 @@
 
 
     <div class="container my-5 border-bottom">
-           <!-- Account detail -->
+        <!-- Account detail -->
         <div class="row justify-content-center my-3">
-            <!--image-->
-            <div class="col-2 img">
-                <img src="{{ user.image.url }}" alt="picture" class="img-fluid rounded-circle" width="200" height="200">
-            </div>
+        <!--image-->
+        <div class="col-2 img">
+            <img src="{{ user.image.url }}" alt="picture" class="img-fluid rounded-circle" width="200" height="200">
+        </div>
 
-            <div class="col-5 detail">
-                <!--id & setting-->
+        <div class="col-5 detail">
+            <!--id & setting-->
 
-                    <div>
-                        <h1 class="d-inline">{{ user.user.username }}</h1>
-                        {% if user.user.id == request.user.id %}
-                            <div class="btn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
-                                <span class="fas fa-cogs"></span>
-                            </div>
-                            <a href="{% url 'create.post' %}" class="btn btn-success">
-                                Add Post
-                            </a>
-                            <a href="{% url 'logout' %}" class="btn btn-danger">
-                                Logout
-                            </a>
-                        {% else %}
-                            {% if request.user.profile.following.all %}
-                                {% for following in request.user.profile.following.all %}
-                                    {% if user.user.id == following.id %}
-                                        <a href="{% url 'unfollow' user.user.id %}" class="btn btn-secondary mx-2">
-                                        Unfollow
-                                        </a>
-                                    {% else %}
-                                        <a href="{% url 'follow' user.user.id %}" class="btn btn-primary mx-2">
-                                            Follow
-                                        </a>
-                                    {% endif %}
-                                {% endfor %}
+            <div>
+                <h1 class="d-inline">{{ user.user.username }}</h1>
+                {% if user.user.id == request.user.id %}
+                    <div class="btn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
+                        <span class="fas fa-cogs"></span>
+                    </div>
+                    <a href="{% url 'create.post' %}" class="btn btn-success">
+                        Add Post
+                    </a>
+                    <a href="{% url 'logout' %}" class="btn btn-danger">
+                        Logout
+                    </a>
+                {% else %}
+                    {% if request.user.profile.following.all %}
+                        {% for following in request.user.profile.following.all %}
+                            {% if user.user.id == following.id %}
+                                <a href="{% url 'unfollow' user.user.id %}" class="btn btn-secondary mx-2">
+                                    Unfollow
+                                </a>
                             {% else %}
                                 <a href="{% url 'follow' user.user.id %}" class="btn btn-primary mx-2">
                                     Follow
                                 </a>
                             {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <a href="{% url 'follow' user.user.id %}" class="btn btn-primary mx-2">
+                            Follow
+                        </a>
+                    {% endif %}
+                {% endif %}
+            </div>
 
-                        {% endif %}
+
+            <!--posts & followers & following-->
+            <div class="info my-4">
+                <!--posts-->
+                <button class="btn btn-warning">
+                    <span class="badge bg-secondary">{{ posts.count }}</span>
+                    Posts
+                </button>
+                <!--followers-->
+                <button class="btn btn-warning mx-2" type="button" data-bs-toggle="modal" data-bs-target="#followers">
+                    <span class="badge bg-secondary">{{ user.user.following.count }}</span>
+                    Followers
+                </button>
+
+                <div class="modal fade" id="followers" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Followers</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <ul class="navbar navbar-nav">
+                                    {% for followers in user.user.following.all %}
+                                        <li class="nav-item">
+                                            <a href="{% url 'profile' followers.user.id %}" class="nav-link link-dark">
+                                                <img src="{{ followers.image.url }}" alt="{{ followers }}" width="50">
+                                                <span>{{ followers }}</span>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
 
-                <!--posts & followers & following-->
-                <div class="info my-4">
-                    <!--posts-->
-                    <a href="" class="btn btn-warning">
-                        <span class="badge bg-secondary">{{ posts.count }}</span>
-                        Posts
-                    </a>
-                    <!--followers-->
-                    <a href="" class="btn btn-warning mx-2">
-                        <span class="badge bg-secondary">0</span>
-                        Followers
-                    </a>
-                    <!--following-->
-                    <a href="" class="btn btn-warning">
-                        <span class="badge bg-secondary">{{ user.following.count }}</span>
-                        Following
-                    </a>
+                <!--following-->
+                <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#following">
+                    <span class="badge bg-secondary">{{ user.following.count }}</span>
+                    Following
+                </button>
+
+                <div class="modal fade" id="following" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Following</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <ul class="navbar navbar-nav">
+                                    {% for following in user.following.all %}
+                                        <li class="nav-item">
+                                            <a href="{% url 'profile' following.id %}" class="nav-link link-dark">
+                                                <img src="{{ following.profile.image.url }}" alt="{{ following }}"
+                                                     width="50">
+                                                <span>{{ following }}</span>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!--bio-->
-                <div class="bio">
+                <div class="bio my-3">
                     <h4>{{ user.bio }}</h4>
                 </div>
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Edit Account</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 class="modal-title" id="staticBackdropLabel">Edit Account</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-center">
                             <div class="content my-3">
-                                <form class="px-5 py-4" action="{% url 'edit' user.user.id %}" method="post" enctype="multipart/form-data">
+                                <form class="px-5 py-4" action="{% url 'edit' user.user.id %}" method="post"
+                                      enctype="multipart/form-data">
                                     {% csrf_token %}
-{#                                    <input class="form-control" type="text" name="first-name" placeholder="First Name" value="{{ user.user.first_name }}">#}
-{#                                    <input class="form-control my-3" type="text" name="last-name" placeholder="Last Name" value="{{ user.user.last_name }}">#}
-{#                                    <input class="form-control" type="email" name="email" placeholder="Email" value="{{ user.user.email }}">#}
-{#                                    <input class="form-control my-3" type="text" name="username" placeholder="Username" value="{{ user.user.username }}">#}
-{#                                    <input class="form-control" type="password" name="password1" placeholder="Password" value="{{ user.user.password }}">#}
+                                    {#                                    <input class="form-control" type="text" name="first-name" placeholder="First Name" value="{{ user.user.first_name }}">#}
+                                    {#                                    <input class="form-control my-3" type="text" name="last-name" placeholder="Last Name" value="{{ user.user.last_name }}">#}
+                                    {#                                    <input class="form-control" type="email" name="email" placeholder="Email" value="{{ user.user.email }}">#}
+                                    {#                                    <input class="form-control my-3" type="text" name="username" placeholder="Username" value="{{ user.user.username }}">#}
+                                    {#                                    <input class="form-control" type="password" name="password1" placeholder="Password" value="{{ user.user.password }}">#}
                                     <label class="form-label" for="bio">Bio:</label>
-                                    <input class="form-control mb-3" type="text" name="bio" id="bio" placeholder="Bio" value="{{ user.bio }}">
+                                    <input class="form-control mb-3" type="text" name="bio" id="bio" placeholder="Bio"
+                                           value="{{ user.bio }}">
                                     <label class="form-label" for="image">Image:</label>
-                                    <input class="form-control mb-5" type="file" accept="image/*" name="image" id="image" value="{{ user.image }}">
+                                    <input class="form-control mb-5" type="file" accept="image/*" name="image"
+                                           id="image" value="{{ user.image }}">
 
                                     <input class="form-control btn btn-primary" type="submit" value="Edit">
                                 </form>
@@ -112,7 +167,7 @@
         </div>
     </div>
 
-
+    </div>
     <!-- Posts -->
     <section class="posts container my-2">
         <div class="row">
@@ -124,7 +179,8 @@
                 </div>
 
                 <!-- Modal -->
-                <div class="modal fade" id="post{{ post.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="post{{ post.id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -132,55 +188,57 @@
                             </div>
                             <div class="modal-body">
                                 <div class="card shadow-lg">
-                                        <div class="header px-3 py-2">
-                                                <div class="user float-start">
-                                                    <img src="{{ user.image.url }}" alt="" class="img-fluid rounded-circle me-2" width="50">
-                                                    <span>{{ user.user.username }}</span>
-                                                </div>
-                                                <div class="dot float-end pt-2">
-                                                    <span class="fas fa-ellipsis-h"></span>
-                                                </div>
+                                    <div class="header px-3 py-2">
+                                        <div class="user float-start">
+                                            <img src="{{ user.image.url }}" alt="" class="img-fluid rounded-circle me-2"
+                                                 width="50">
+                                            <span>{{ user.user.username }}</span>
+                                        </div>
+                                        <div class="dot float-end pt-2">
+                                            <span class="fas fa-ellipsis-h"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="content my-2 text-center">
+                                        <img src="{{ post.image.url }}" alt="" class="card-img">
+                                    </div>
+
+                                    <div class="footer px-3 pb-2">
+                                        <div class="icons">
+                                            <div class="items float-start">
+                                                <span class="far fa-heart"></span>
+
+                                                <span class="far fa-comment"></span>
+
+                                                <span class="far fa-paper-plane"></span>
                                             </div>
 
-                                        <div class="content my-2 text-center">
-                                            <img src="{{ post.image.url }}" alt="" class="card-img">
+                                            <div class="save float-end">
+                                                <span class="far fa-bookmark"></span>
+                                            </div>
+                                            <br>
+
+                                            <div class="like">
+                                                <span>0</span>
+                                                <span>like</span>
+                                            </div>
                                         </div>
 
-                                        <div class="footer px-3 pb-2">
-                                                    <div class="icons">
-                                                        <div class="items float-start">
-                                                            <span class="far fa-heart"></span>
+                                        <div class="caption">
+                                            <h5>{{ user.user.username }} :</h5>
+                                            <p>{{ post.description }}</p>
 
-                                                            <span class="far fa-comment"></span>
-
-                                                            <span class="far fa-paper-plane"></span>
-                                                        </div>
-
-                                                        <div class="save float-end">
-                                                            <span class="far fa-bookmark"></span>
-                                                        </div><br>
-
-                                                        <div class="like">
-                                                            <span>0</span>
-                                                            <span>like</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="caption">
-                                                        <h5>{{ user.user.username }} :</h5>
-                                                        <p>{{ post.description }}</p>
-
-                                                        <div class="date">
-                                                            <small>{{ post.created_at.date }}</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="date">
+                                                <small>{{ post.created_at.date }}</small>
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
                             </div>
                             {% if user.user.id == request.user.id %}
                                 <div class="modal-footer">
-                                    <a href="{% url 'update.post' post.id  %}" class="btn btn-warning">Update</a>
-                                    <a href="{% url 'delete.post' post.id  %}" class="btn btn-danger">Delete</a>
+                                    <a href="{% url 'update.post' post.id %}" class="btn btn-warning">Update</a>
+                                    <a href="{% url 'delete.post' post.id %}" class="btn btn-danger">Delete</a>
                                 </div>
                             {% endif %}
                         </div>
@@ -193,9 +251,6 @@
 
 
 {% endblock %}
-
-
-
 
 
 
