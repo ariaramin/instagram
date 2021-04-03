@@ -22,7 +22,7 @@
             <div>
                 <h1 class="d-inline">{{ user.user.username }}</h1>
                 {% if user.user.id == request.user.id %}
-                    <div class="btn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></button>
+                    <div class="btn" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         <span class="fas fa-cogs"></span>
                     </div>
                     <a href="{% url 'create.post' %}" class="btn btn-success">
@@ -32,18 +32,10 @@
                         Logout
                     </a>
                 {% else %}
-                    {% if request.user.profile.following.all %}
-                        {% for following in request.user.profile.following.all %}
-                            {% if user.user.id == following.id %}
-                                <a href="{% url 'unfollow' user.user.id %}" class="btn btn-secondary mx-2">
-                                    Unfollow
-                                </a>
-                            {% else %}
-                                <a href="{% url 'follow' user.user.id %}" class="btn btn-primary mx-2">
-                                    Follow
-                                </a>
-                            {% endif %}
-                        {% endfor %}
+                    {% if user_is_followers %}
+                        <a href="{% url 'unfollow' user.user.id %}" class="btn btn-secondary mx-2">
+                            Unfollow
+                        </a>
                     {% else %}
                         <a href="{% url 'follow' user.user.id %}" class="btn btn-primary mx-2">
                             Follow
@@ -62,7 +54,7 @@
                 </button>
                 <!--followers-->
                 <button class="btn btn-warning mx-2" type="button" data-bs-toggle="modal" data-bs-target="#followers">
-                    <span class="badge bg-secondary">{{ user.user.following.count }}</span>
+                    <span class="badge bg-secondary">{{ followers }}</span>
                     Followers
                 </button>
 
@@ -94,7 +86,7 @@
 
                 <!--following-->
                 <button class="btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#following">
-                    <span class="badge bg-secondary">{{ user.following.count }}</span>
+                    <span class="badge bg-secondary">{{ following }}</span>
                     Following
                 </button>
 

@@ -32,6 +32,9 @@ def profile(request, user_id):
     context = {
         'user': Profile.objects.get(user_id=user_id),
         'posts': Post.objects.filter(user_id=user_id),
+        'followers': Profile.objects.get(user_id=user_id).user.following.all().count(),
+        'following': Profile.objects.get(user_id=user_id).following.all().count(),
+        'user_is_followers': Profile.objects.get(user_id=user_id).user.following.filter(user_id=request.user.id)
     }
     return render(request, 'profile.html', context)
 
@@ -39,7 +42,6 @@ def profile(request, user_id):
 def follow(request, user_id):
     user = Profile.objects.get(user_id=request.user.id)
     user.following.add(user_id)
-    # print(user.following.get(username='ariaramin'))
     user.save()
     return redirect('profile', user_id)
 

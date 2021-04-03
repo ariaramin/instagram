@@ -17,6 +17,10 @@ def create(request):
 
 def show(request):
     posts = Post.objects.all()
+    # global posts
+    # for following in request.user.profile.following.all():
+    #     posts = Post.objects.filter(user_id=following)
+    #     print(posts)
     return render(request, 'show.html', {'posts': posts})
 
 
