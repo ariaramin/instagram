@@ -8,5 +8,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='static/post/images')
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    like = models.ManyToManyField(User, related_name='like')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+

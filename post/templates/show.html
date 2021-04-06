@@ -29,7 +29,21 @@
                                 <div class="icons">
                                     <div class="items float-start">
 
-                                        <span class="far fa-heart"></span>
+                                    {% if post.like.all %}
+                                        {% if request.user in post.like.all %}
+                                                <a href="{% url 'dislike.post' post.id %}">
+                                                    <span class="fas fa-heart" style="color: crimson"></span>
+                                                </a>
+                                        {% else %}
+                                                <a href="{% url 'like.post' post.id %}" class="link-dark">
+                                                    <span class="far fa-heart"></span>
+                                                </a>
+                                        {% endif %}
+                                    {% else %}
+                                         <a href="{% url 'like.post' post.id %}" class="link-dark">
+                                             <span class="far fa-heart"></span>
+                                         </a>
+                                    {% endif %}
 
                                         <span class="far fa-comment"></span>
 
@@ -41,7 +55,7 @@
                                     </div><br>
 
                                     <div class="like">
-                                        <span>0</span>
+                                        <span>{{ post.like.count }}</span>
                                         <span>like</span>
                                     </div>
                                 </div>
@@ -60,8 +74,6 @@
             </div>
         </div>
     </main>
-
-
 {% endblock %}
 
 

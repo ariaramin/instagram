@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+    <section class="posts container my-5">
+        <div class="row">
+            {% for post in posts %}
+                <div class="col-4 post my-4" type="button" data-bs-toggle="modal" data-bs-target="#post{{ post.id }}">
+                    <div class="card">
+                        <img src="{{ post.image.url }}" alt="post" class="card-img" width="416" height="416">
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="post{{ post.id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card shadow-lg">
+                                    <div class="header px-3 py-2">
+                                        <div class="user float-start">
+                                            <a href="{% url 'profile' post.user.id %}" class="link-dark">
+                                                <img src="{{ post.user.profile.image.url }}" alt="" class="img-fluid rounded-circle me-2"
+                                                     width="50">
+                                                <span>{{ post.user.username }}</span>
+                                            </a>
+                                        </div>
+                                        <div class="dot float-end pt-2">
+                                            <span class="fas fa-ellipsis-h"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="content my-2 text-center">
+                                        <img src="{{ post.image.url }}" alt="" class="card-img">
+                                    </div>
+
+                                    <div class="footer px-3 pb-2">
+                                        <div class="icons">
+                                            <div class="items float-start">
+                                                <span class="far fa-heart"></span>
+
+                                                <span class="far fa-comment"></span>
+
+                                                <span class="far fa-paper-plane"></span>
+                                            </div>
+
+                                            <div class="save float-end">
+                                                <span class="far fa-bookmark"></span>
+                                            </div>
+                                            <br>
+
+                                            <div class="like">
+                                                <span>0</span>
+                                                <span>like</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="caption">
+                                            <h5>{{ post.user.username }} :</h5>
+                                            <p>{{ post.description }}</p>
+
+                                            <div class="date">
+                                                <small>{{ post.created_at.date }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

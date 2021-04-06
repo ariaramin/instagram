@@ -16,11 +16,7 @@ def create(request):
 
 
 def show(request):
-    posts = Post.objects.all()
-    # global posts
-    # for following in request.user.profile.following.all():
-    #     posts = Post.objects.filter(user_id=following)
-    #     print(posts)
+    posts = Post.objects.all().order_by('-created_at')
     return render(request, 'show.html', {'posts': posts})
 
 
@@ -40,4 +36,20 @@ def delete(request, post_id):
     return redirect('profile', request.user.id)
 
 
+def explore(request):
+    posts = Post.objects.all().order_by('-created_at')
+    return render(request, 'explor.html', {'posts': posts})
 
+
+def like(request, post_id):
+    post = Post.objects.get(id=post_id)
+    post.like.add(request.user)
+    post.save()
+    return redirect('show.post')
+
+
+def dislike(request, post_id):
+    post = Post.objects.get(id=post_id)
+    post.like.remove(request.user)
+    post.save()
+    return redirect('show.post')
