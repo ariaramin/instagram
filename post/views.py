@@ -40,16 +40,3 @@ def explore(request):
     posts = Post.objects.all().order_by('-created_at')
     return render(request, 'explor.html', {'posts': posts})
 
-
-def like(request, post_id):
-    post = Post.objects.get(id=post_id)
-    post.like.add(request.user)
-    post.save()
-    return redirect('show.post')
-
-
-def dislike(request, post_id):
-    post = Post.objects.get(id=post_id)
-    post.like.remove(request.user)
-    post.save()
-    return redirect('show.post')

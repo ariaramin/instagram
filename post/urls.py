@@ -8,6 +8,4 @@ urlpatterns = [
     path('update/<int:post_id>', views.update, name='update.post'),
     path('delete/<int:post_id>', views.delete, name='delete.post'),
     path('explore', views.explore, name='explore.post'),
-    path('like/<int:post_id>', views.like, name='like.post'),
-    path('dislike/<int:post_id>', views.dislike, name='dislike.post'),
 ]

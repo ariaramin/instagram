@@ -28,22 +28,7 @@
                         <div class="footer px-3 pb-2">
                                 <div class="icons">
                                     <div class="items float-start">
-
-                                    {% if post.like.all %}
-                                        {% if request.user in post.like.all %}
-                                                <a href="{% url 'dislike.post' post.id %}">
-                                                    <span class="fas fa-heart" style="color: crimson"></span>
-                                                </a>
-                                        {% else %}
-                                                <a href="{% url 'like.post' post.id %}" class="link-dark">
-                                                    <span class="far fa-heart"></span>
-                                                </a>
-                                        {% endif %}
-                                    {% else %}
-                                         <a href="{% url 'like.post' post.id %}" class="link-dark">
-                                             <span class="far fa-heart"></span>
-                                         </a>
-                                    {% endif %}
+                                        <span class="far fa-heart"></span>
 
                                         <span class="far fa-comment"></span>
 
@@ -55,7 +40,7 @@
                                     </div><br>
 
                                     <div class="like">
-                                        <span>{{ post.like.count }}</span>
+                                        <span>{{ post.like }}</span>
                                         <span>like</span>
                                     </div>
                                 </div>
@@ -68,7 +53,6 @@
                                     </div>
                                 </div>
                         </div>
-
                     </div>
                 {% endfor %}
             </div>
